@@ -1,0 +1,14 @@
+* bloomtail
+
+** summary
+
+This is a description of project bloomtail.
+
+** usage
+
+Example:
+#+begin_example
+make test
+./bloomtail --help
+./bloomtail --verbose --verbose # for debug
+#+end_example
