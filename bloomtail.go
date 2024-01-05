@@ -1,6 +1,7 @@
 package bloomtail
 
 import (
+	"bytes"
 	"fmt"
 	"log/slog"
 	"os/exec"
@@ -41,14 +42,20 @@ func parseFlags() error {
 }
 
 func run() error {
-	cmd := exec.Command("ls", "-l", "/nonexistent-folder") // Replace with your actual command and arguments
+	cmd := exec.Command("ls", "-l", "/nonexistentpath")
 
-	output, err := cmd.CombinedOutput()
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+
+	err := cmd.Run()
 	if err != nil {
-		fmt.Printf("Error executing command: %v\n", err)
+		slog.Error("cmd.Run() failed", "error", err)
 	}
 
-	fmt.Printf("Command output:\n%s", output)
+	outStr, errStr := stdout.String(), stderr.String()
+	fmt.Printf("stdout: %s\n", outStr)
+	fmt.Printf("stderr: %s\n", errStr)
 
 	return nil
 }

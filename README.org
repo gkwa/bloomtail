@@ -2,7 +2,8 @@
 
 ** summary
 
-This is a description of project bloomtail.
+Learn how to capture stderr and stdout into separate variables when
+runing golang exec.Command's
 
 ** usage
 
